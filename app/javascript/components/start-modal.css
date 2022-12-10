@@ -19,13 +19,11 @@
     width: 300px;
     margin: 0px auto;
     padding: 20px 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    box-shadow: 0 2px 8px rgb(40, 44, 52);
     transition: all 0.3s ease;
 
     border-radius: 15px !important;
-    background-color: rgba(0,0,0,0.4) !important;
+    background-color: #1c1f25 !important;
 }
 
 .modal-header h3 {
@@ -33,9 +31,18 @@
     color: #42b983;
 }
 
+.modal-header {
+    border: none !important;
+    padding: 0 !important;
+}
+
+.modal-footer {
+    border: none !important;
+    padding: 0 !important;
+}
+
 .modal-body {
     margin: 20px 0;
-    color: white;
 }
 
 .input-modal {

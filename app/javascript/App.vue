@@ -17,23 +17,35 @@
             </div>
           </div>
           <div class="card-body msg_card_body" ref="list">
-            <div class="d-flex justify-content-start mb-4" v-for="message in messages" :key="message">
-              <div class="img_cont_msg">
-                <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png"
-                  class="rounded-circle user_img_msg">
+            <div v-for="message in messages" :key="message">
+              <div v-if="username !== message.username" class="d-flex justify-content-start mb-4" >
+                <div class="img_cont_msg">
+                  <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png"
+                       class="rounded-circle user_img_msg" alt="foto user">
+                </div>
+                <div class="msg_cotainer">
+                  <div class="msg_name">{{ message.username }}</div>
+                  {{ message.message }}
+                  <span class="msg_time">{{convertTime(message.created_at)}}</span>
+                </div>
               </div>
-              <div class="msg_cotainer">
-                <div class="msg_name">{{ message.username }}</div>
-                {{ message.message }}
-                <span class="msg_time">{{convertTime(message.created_at)}}</span>
+              <div v-else class="d-flex justify-content-end mb-4">
+                <div class="msg_cotainer_send">
+                  <div class="msg_name_send">{{ message.username }}</div>
+                  {{ message.message }}
+                  <span class="msg_time_send">{{convertTime(message.created_at)}}</span>
+                </div>
+                <div class="img_cont_msg">
+                  <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" class="rounded-circle user_img_msg">
+                </div>
               </div>
+
             </div>
           </div>
           <div class="card-footer">
             <form @submit.prevent="submit">
               <div class="input-group">
-                <input class="form-control type_msg" placeholder="Type your message..." v-model="message"/>
-                <modal v-model="username" />
+                <input class="form-control type_msg" placeholder="Type your message..." v-model="message" autofocus required>
                 <button title="send" type="submit" class="input-group-append send_btn">
                   <i class="fas fa-location-arrow"></i>
                 </button>
@@ -44,14 +56,10 @@
       </div>
     </div>
   </div>
-  <Teleport to="body">
-    <!-- use the modal component, pass in the prop -->
-    <modal :show="showModal" @close="showModal = false">
-      <template #header>
-        <h3>custom header</h3>
-      </template>
+  <Transition to="body">
+    <modal :show="showModal" @close="showModal = false" ref="modal">
     </modal>
-  </Teleport>
+  </Transition>
 
 </template>
 <script>
@@ -72,7 +80,7 @@ export default {
   },
   data() {
     return {
-      showModal: true
+      showModal: true,
     }
   },
   setup() {
@@ -100,7 +108,6 @@ export default {
     });
 
     const submit = async () => {
-      console.log(message.value, username.value);
       await fetch('http://localhost:3000/api/v1/chat/create', {
         method: 'POST',
         headers: {
@@ -114,22 +121,41 @@ export default {
 
       message.value = '';
     }
-    return { username, messages, message, submit }
+    return {username, messages, message, submit }
   },
   
   updated() {
     this.scrollToEnd();
+    this.setUsername();
   },
   
   methods: {
     scrollToEnd: function () {
-      var container = this.$refs.list;
-        container.scrollTop = container.scrollHeight;
+      const container = this.$refs.list;
+      container.scrollTop = container.scrollHeight;
     },
     convertTime: function (time) {
       return moment(time).format('LT');
-    }
-  }
-}
+    },
+    setUsername: function () {
+      this.username = this.$refs.modal.username;
+    },
+    checkForm: function (e) {
+      if (this.message) {
+        return true;
+      }
 
+      this.errors = [];
+
+      if (!this.name) {
+        this.errors.push('Name required.');
+      }
+      if (!this.age) {
+        this.errors.push('Age required.');
+      }
+
+      e.preventDefault();
+    }
+  },
+}
 </script>

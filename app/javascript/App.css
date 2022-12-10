@@ -156,7 +156,7 @@ max-width: 70%;
 .msg_name {
 font-size: .875rem;
 font-weight: bold;
-color: blueviolet;
+color: darkred;
 }
 .msg_cotainer_send{
 margin-top: auto;
@@ -167,6 +167,13 @@ background-color: #78e08f;
 padding: 10px;
 position: relative;
 max-width: 70%;
+}
+.msg_name_send {
+  font-size: .875rem;
+  font-weight: bold;
+  color: darkslategray;
+  justify-content: end;
+  display: flex;
 }
 .msg_time{
 position: absolute;
