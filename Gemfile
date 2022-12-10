@@ -72,3 +72,6 @@ group :test do
 end
 
 gem "vite_rails", "~> 3.0"
+
+gem "figaro", "~> 1.2"
+gem "pusher", "~> 2.0"
