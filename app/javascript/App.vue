@@ -95,7 +95,7 @@ export default {
         cluster: 'ap1'
       });
 
-      fetch('http://localhost:3000/api/v1/chat/show')
+      fetch('https://sea-lion-app-gp5j3.ondigitalocean.app/api/v1/chat/show')
         .then(res => res.json())
         .then(data => {
           messages.value = data;
@@ -108,7 +108,7 @@ export default {
     });
 
     const submit = async () => {
-      await fetch('http://localhost:3000/api/v1/chat/create', {
+      await fetch('https://sea-lion-app-gp5j3.ondigitalocean.app/api/v1/chat/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
