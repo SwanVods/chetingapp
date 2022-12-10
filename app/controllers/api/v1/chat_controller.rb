@@ -2,7 +2,7 @@ require 'json'
 require 'pusher'
 
 class Api::V1::ChatController < ApplicationController
-
+  protect_from_forgery with: :null_session
   def create
 
     chat_json = JSON.parse(request.body.read)

@@ -5,6 +5,11 @@
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
-    "vite-plugin-full-reload": "^1.0.5"
+    "bootstrap": "^5.2.3",
+    "jquery": "^3.6.1",
+    "moment": "^2.29.4",
+    "pusher-js": "^7.5.0",
+    "vite-plugin-full-reload": "^1.0.5",
+    "vue": "^3.2.45"
   }
 }
