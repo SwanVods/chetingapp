@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: chetingapp_production
-  username: chetingapp
-  password: <%= ENV["CHETINGAPP_DATABASE_PASSWORD"] %>
+  database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_UNAME"] %>
+  host:<%= ENV["DATABASE_HOST"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
